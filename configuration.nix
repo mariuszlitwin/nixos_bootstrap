@@ -5,61 +5,61 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ./bootstrap.nix
-      ./hardware.d/virtualisation/virtualbox.nix
-      ./layout.d/wm/sway.nix
-    ];
+  imports = [ 
+    ./hardware-configuration.nix
+    ./bootstrap.nix
+    ./hardware.d/samsung/n740u3e-x02pl.nix
+    ./layout.d/wm/sway.nix 
+  ];
 
-  # Use the systemd-boot EFI boot loader.
+  # Boot
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.initrd.luks.devices = [
+    {
+      name = "root";
+      device = "/dev/sda3";
+      preLVM = true;
+    }
+  ];
+  boot.plymouth = {
+    enable = true;
+  };
+  
+  # Basic Nix
+  nix.useSandbox = true;
+  nixpkgs.config.allowUnfree = true;
+  security.sudo.enable = true;
 
-  # networking.hostName = "nixos"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  # Networking
+  networking = {
+    hostName = "skynet";
+    interfaceMonitor.enable = true;
+    wireless.userControlled.enable = true;
+  };
 
-  # Select internationalisation properties.
-  # i18n = {
-  #   consoleFont = "Lat2-Terminus16";
-  #   consoleKeyMap = "us";
-  #   defaultLocale = "en_US.UTF-8";
-  # };
+  # Locale
+  i18n = {
+    consoleKeyMap = "pl";
+    defaultLocale = "en_GB.UTF-8";
+  };
+  time.timeZone = "UTC";
 
-  # Set your time zone.
-  # time.timeZone = "Europe/Amsterdam";
+  # Basic packages
+  environment.systemPackages = with pkgs; [
+    wget vim gitAndTools.gitFull firmwareLinuxNonFree
+  ];
 
-  # List packages installed in system profile. To search by name, run:
-  # $ nix-env -qaP | grep wget
-  # environment.systemPackages = with pkgs; [
-  #   wget
-  # ];
-
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
-
-  # Enable CUPS to print documents.
-  # services.printing.enable = true;
-
-  # Enable the X11 windowing system.
-  # services.xserver.enable = true;
-  # services.xserver.layout = "us";
-  # services.xserver.xkbOptions = "eurosign:e";
-
-  # Enable the KDE Desktop Environment.
-  # services.xserver.displayManager.kdm.enable = true;
-  # services.xserver.desktopManager.kde4.enable = true;
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  # users.extraUsers.guest = {
-  #   isNormalUser = true;
-  #   uid = 1000;
-  # };
+  # Users
+  users.extraUsers.mlitwin = {
+    description = "Mariusz Litwin";
+    createHome = true;
+    home = "/home/mlitwin";
+    group = "users";
+    extraGroups = powerUser.groups ++ [ "wheel" ];
+    uid = 1000;
+  };
 
   # The NixOS release to be compatible with for stateful data such as databases.
   system.stateVersion = "16.09";
-
 }
