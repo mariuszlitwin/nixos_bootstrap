@@ -1,0 +1,51 @@
+! /etc/X11/Xresources : DO NOT EDIT -- this file has been generated automatically
+!
+! Ref.: /etc/nixos/dotfiles/Xresources
+
+*antialias: true
+*autohint:  true
+
+! XTerm
+XTerm*locale:          true
+XTerm*metaSendsEscape: true
+XTerm*eightBitInput:   false
+XTerm*saveLines:       4096
+XTerm*faceName:        Ubuntu Mono:pixelsize=14
+
+! URxvt 
+URxvt*font:            xft:Ubuntu Mono:pixelsize=14
+URxvt*scrollBar:       false
+URxvt*title:           terminal
+URxvt*borderless:      1
+URxvt*secondaryScreen: 1
+URxvt*secondaryScroll: 0
+
+! Colors
+! special
+*foreground:  #e1e1e1
+*background:  #1e1e1e
+*cursorColor: #f0f0f0
+! black
+*color0:      #1e1e1e
+*color8:      #8e8e8e
+! red
+*color1:      #dc322f
+*color9:      #ed9897
+! green
+*color2:      #0ee57b
+*color10:     #86f2bd
+! yellow
+*color3:      #fbb829
+*color11:     #fddb94
+! blue
+*color4:      #268bd2
+*color12:     #92c5e8
+! magenta
+*color5:      #d33682
+*color13:     #e99ac0
+! cyan
+*color6:      #2dfdff
+*color14:     #96feff
+! white
+*color7:      #e1e1e1
+*color15:     #f0f0f0

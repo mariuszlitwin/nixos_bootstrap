@@ -7,9 +7,10 @@
 {
   imports = [ 
     ./hardware-configuration.nix
-    ./bootstrap.nix
     ./hardware.d/samsung/n740u3e-x02pl.nix
-    ./layout.d/wm/sway.nix 
+    ./layout.d/shell.d/bash.nix
+    ./layout.d/desktop.nix
+    ./password.secret.nix
   ];
 
   # Boot
@@ -22,42 +23,23 @@
       preLVM = true;
     }
   ];
-  boot.plymouth = {
-    enable = true;
-  };
-  
-  # Basic Nix
-  nix.useSandbox = true;
-  nixpkgs.config.allowUnfree = true;
-  security.sudo.enable = true;
 
   # Networking
-  networking = {
-    hostName = "skynet";
-    interfaceMonitor.enable = true;
-    wireless.userControlled.enable = true;
-  };
+  networking.hostName = "skynet";
 
   # Locale
-  i18n = {
-    consoleKeyMap = "pl";
-    defaultLocale = "en_GB.UTF-8";
-  };
-  time.timeZone = "UTC";
-
-  # Basic packages
-  environment.systemPackages = with pkgs; [
-    wget vim gitAndTools.gitFull firmwareLinuxNonFree
-  ];
-
+  i18n.defaultLocale = "pl_PL.UTF-8";
+  i18n.consoleKeyMap = "pl";
+  services.xserver.layout = "pl";
   # Users
-  users.extraUsers.mlitwin = {
+  users.users.mlitwin = {
     description = "Mariusz Litwin";
     createHome = true;
     home = "/home/mlitwin";
     group = "users";
-    extraGroups = powerUser.groups ++ [ "wheel" ];
+    extraGroups = [ "audio" "wheel" "systemd-journal" ];
     uid = 1000;
+    useDefaultShell = true;
   };
 
   # The NixOS release to be compatible with for stateful data such as databases.

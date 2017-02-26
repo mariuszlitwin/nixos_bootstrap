@@ -1,0 +1,22 @@
+#!/usr/bin/env sh
+#
+# /etc/X11/xinitrc : DO NOT EDIT -- this file has been generated automatically
+#
+# Ref.: /etc/nixos/dotfiles/xinirc
+
+[[ -f /etc/X11/xresources ]] && xrdb -merge /etc/X11/xresources
+
+# Is current terminal able to display color?
+if [ -x /run/current-system/sw/bin/tput ] && tput setaf 1 >& /dev/null; then
+  export IS_COLOR_TERM=true
+else
+  export IS_COLOR_TERM=false
+fi;
+
+# Change default colors on default TTY
+if [ "$TERM" = "linux" ] && [ -f /etc/X11/xresources ] && [[ "$IS_COLOR_TERM" = true ]]; then
+  for i in $(grep color "/etc/X11/xresources" | sed 's/^\*color//g' | sed 's/:\ *#/ /g' | awk '{ printf "\\e]P%X%s", $1, $2 }' ); do
+    echo -en "$i"
+  done
+  clear
+fi
