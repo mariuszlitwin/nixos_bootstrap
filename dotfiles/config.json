@@ -1,3 +1,30 @@
 {
+  "color": {
+    "black":    "#1e1e1e",
+    "lblack":   "#8e8e8e",
+    "white":    "#e1e1e1",
+    "lwhite":   "#f0f0f0",
+    "red":      "#dc322f",
+    "lred":     "#ed9897",
+    "green":    "#0ee57b",
+    "lgreen":   "#86f2bd",
+    "blue":     "#268bd2",
+    "lblue":    "#92c5e8",
+    "yellow":   "#fbb829",
+    "lyellow":  "#fddb93",
+    "magenta":  "#d33682",
+    "lmagenta": "#e99ac0",
+    "cyan":     "#2dfdff",
+    "lcyan":    "#96feff",
 
+    "background": "#1e1e1e",
+    "foreground": "#e1e1e1",
+
+    "primary":  "#0ee75b",
+    "lprimary": "#86f2bd"
+  },
+  "font": {
+    "face": "Ubuntu Mono",
+    "pixelsize": 14
+  }
 }
