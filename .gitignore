@@ -3,3 +3,5 @@
 *.swo
 *.secret.*
 dotfiles/build/**
+result
+hardware-configuration.nix
