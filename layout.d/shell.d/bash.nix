@@ -10,6 +10,6 @@
   };
 
   environment.etc."bashrc.local" = {
-    source = /etc/nixos/dotfiles/bashrc.local;
+    source = /etc/nixos/dotfiles/build/bashrc.local;
   };
 }

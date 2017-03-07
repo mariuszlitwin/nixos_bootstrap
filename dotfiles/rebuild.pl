@@ -4,7 +4,7 @@ use 5.22.2;
 use warnings;
 use strict;
 
-use Data::Dumper;
+use File::Path;
 use File::Basename;
 use Parse::CPAN::Meta;
 
@@ -86,5 +86,6 @@ my $configpath = "$scriptdir/config.json";
 my $config     = Parse::CPAN::Meta->load_file($configpath);
 my %flatconfig = flatten($config);
 
+rmtree("$scriptdir/build");
 mkdir("$scriptdir/build");
-dirwalk("$scriptdir/template", buildconf(\%flatconfig));
+dirwalk("$scriptdir/template", buildconf(\%flatconfig, 'template', 'build'));

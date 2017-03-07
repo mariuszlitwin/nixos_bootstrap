@@ -24,7 +24,6 @@
     sessionVariables = {
       EDITOR = "vim";
       PYTHONDONTWRITEBYTECODE = "1";
-      TERMINAL = "termite";
     };
     # Basic packages
     systemPackages = with pkgs; [
@@ -38,6 +37,7 @@
       nix-repl
       mc
       jq
+      gnupg20
     ];
   };
 }

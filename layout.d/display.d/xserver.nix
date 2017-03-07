@@ -12,8 +12,8 @@
     ];
 
     etc = {
-      "X11/xresources".source = /etc/nixos/dotfiles/xresources;
-      "X11/xinitrc".source = /etc/nixos/dotfiles/xinitrc;
+      "X11/xresources".source = /etc/nixos/dotfiles/build/xresources;
+      "X11/xinitrc".source = /etc/nixos/dotfiles/build/xinitrc;
     };
 
     extraInit = ''

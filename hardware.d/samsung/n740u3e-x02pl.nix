@@ -19,19 +19,14 @@
     "fbcon"
   ];
   
-  services.xserver.synaptics = {
+  services.xserver.libinput = {
     enable = true;
-    tapButtons = true;
-
-    twoFingerScroll = true;
-    horizEdgeScroll = false;
-    vertEdgeScroll = false;
-    vertTwoFingerScroll = true;
-    horizTwoFingerScroll = true;
-
-    palmDetect = true;
-    palmMinWidth = 8;
-    palmMinZ = 100;
+    disableWhileTyping = true;
+    tapping = true;
+    tappingDragLock = true;
+    middleEmulation = true;
+    naturalScrolling = true;
+    scrollMethod = "twofinger";
   };
 
   services.xserver.videoDrivers = [ "intel" ];

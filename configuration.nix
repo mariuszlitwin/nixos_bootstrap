@@ -23,6 +23,7 @@
       preLVM = true;
     }
   ];
+  # boot.plymouth.enable = true;
 
   # Networking
   networking.hostName = "skynet";

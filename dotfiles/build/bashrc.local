@@ -108,7 +108,7 @@ function __exit_code {
   if [ $exit_code -eq 0 ]; then
     _fs fg:green; printf '█'; _fr all;
   else
-    _fs fg:magenta; printf '░'; _fr all;
+    _fs fg:red; printf '░'; _fr all;
   fi
 }
 
@@ -120,7 +120,7 @@ function __dir_info {
   if [[ -w '.' ]]; then 
     _fr all; printf ' '; printf $1; printf ' ';
   else
-    _fs fg:magenta; printf ' '; printf $1; printf ' '; _fr all;
+    _fs fg:red; printf ' '; printf $1; printf ' '; _fr all;
   fi;
 }
 
