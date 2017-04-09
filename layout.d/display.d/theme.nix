@@ -7,23 +7,25 @@
 
   environment = {
     systemPackages = with pkgs; [
-      kde5.breeze kde5.breeze-grub kde5.breeze-gtk kde5.breeze-icons kde5.breeze-plymouth
+      adapta-gtk-theme
+      breeze-qt4 breeze-qt5 breeze-gtk
+      gnome3.adwaita-icon-theme
     ];
     
     sessionVariables = {
-      GTK2_RC_FILES = "${pkgs.kde5.breeze-gtk}/share/themes/Breeze-Dark/gtk-2.0/gtkrc";
+      GTK2_RC_FILES = "${pkgs.breeze-gtk}/share/themes/Breeze-Dark/gtk-2.0/gtkrc";
       GTK_THEME = "Breeze:dark";
     };
   };
 
-  # boot.plymouth.themePackages = [ pkgs.kde5.breeze-plymouth ];
+  # boot.plymouth.themePackages = with pkgs; [ breeze-plymouth ];
 
   services.xserver.displayManager.lightdm = {
-    background = "#1e1e1e";
+    background = "#31363b";
     greeters.gtk = {
       theme = {
-        name = "Breeze-Dark";
-        package = pkgs.kde5.breeze-gtk;
+        name = "Adapta";
+        package = pkgs.adapta-gtk-theme;
       };
     };
   };

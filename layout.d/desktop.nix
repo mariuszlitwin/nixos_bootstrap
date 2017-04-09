@@ -2,13 +2,16 @@
 
 {
   imports = [
-    ./core.nix
+    ./cli.nix
     ./display.d/i3.nix
     ./display.d/lightdm.nix
   ];
 
+  boot.initrd.kernelModules = [ "ipheth" ];
+
   hardware.pulseaudio = {
     enable = true;
+    support32Bit = true;
     package = pkgs.pulseaudioFull;
   };
 
@@ -38,6 +41,8 @@
     ];
   };
 
+  programs.ssh.forwardX11 = true;
+
   environment = {
     sessionVariables = {
       TERMINAL = "termite -c /etc/xdg/termite/config";
@@ -46,18 +51,26 @@
       termite = "termite -c /etc/xdg/termite/config";
     };
     systemPackages = with pkgs; [
+      alsaLib
       termite
       chromium firefox
+      vlc
       gimp inkscape
+      abiword antiword gnumeric
       scrot 
-      xautolock arandr
+      arandr glxinfo xorg.xhost
       rfkill rfkill_udev
       keepassx2
-      keybase
+      keybase-gui
+      qbittorrent
     ];
   };
 
   environment.etc = {
     "xdg/termite/config".source = /etc/nixos/dotfiles/build/termite/config;
   };
+  services.udev.extraRules = ''
+    # Execute pairing program with iPhone
+    ACTION=="add|remove", SUBSYSTEM=="net", ATTR{idVendor}=="05ac", ENV{ID_USB_DRIVER}=="ipheth", SYMLINK+="iphone", RUN+="${pkgs.systemd}/bin/systemctl restart systemd-networkd.service"
+  '';
 }
