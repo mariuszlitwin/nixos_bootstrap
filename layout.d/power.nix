@@ -18,6 +18,6 @@
   };
 
   environment.systemPackages = with pkgs; [
-    gmp
+    gmp lmms
   ];
 }
